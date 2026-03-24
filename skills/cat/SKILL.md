@@ -1,8 +1,7 @@
 ---
 name: cat
 description: Controls the Claude Cat terminal animation. Launches or stops an animated ASCII cat in a tmux pane below the Claude Code session.
-argument-hint: <start|stop>
-allowed-tools: [Bash]
+level: 1
 ---
 
 <Purpose>
