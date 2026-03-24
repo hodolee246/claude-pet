@@ -1,0 +1,15 @@
+{
+  "name": "claude-cat",
+  "version": "1.0.0",
+  "description": "Cute ASCII cat that lives in your tmux pane and reacts to Claude Code activity",
+  "author": {
+    "name": "hodolee246"
+  },
+  "repository": "https://github.com/hodolee246/claude-cat",
+  "license": "MIT",
+  "keywords": ["claude-code", "plugin", "animation", "cat", "tmux", "ascii"],
+  "skills": "./skills/",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

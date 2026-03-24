@@ -1,0 +1,27 @@
+{
+  "name": "claude-cat",
+  "version": "1.0.0",
+  "description": "Cute ASCII cat that lives in your tmux pane and reacts to Claude Code activity",
+  "type": "module",
+  "files": [
+    ".claude-plugin",
+    "hooks",
+    "scripts",
+    "daemon",
+    "skills",
+    "README.md"
+  ],
+  "keywords": [
+    "claude-code",
+    "plugin",
+    "cat",
+    "animation",
+    "tmux",
+    "ascii-art",
+    "terminal"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
