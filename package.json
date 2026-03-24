@@ -1,5 +1,5 @@
 {
-  "name": "claude-cat",
+  "name": "claude-pet",
   "version": "1.0.0",
   "description": "Cute ASCII cat that lives in your tmux pane and reacts to Claude Code activity",
   "type": "module",
