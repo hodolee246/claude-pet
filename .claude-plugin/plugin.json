@@ -8,7 +8,6 @@
   "repository": "https://github.com/hodolee246/claude-pet",
   "license": "MIT",
   "keywords": ["claude-code", "plugin", "animation", "cat", "tmux", "ascii"],
-  "skills": "./skills/",
   "engines": {
     "node": ">=18.0.0"
   }
