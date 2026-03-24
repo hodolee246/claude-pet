@@ -1,13 +1,21 @@
 {
-  "name": "claude-pet",
-  "version": "1.0.0",
-  "description": "Cute ASCII cat that lives in your tmux pane and reacts to Claude Code activity — thinking, happy, scared, sleeping.",
-  "category": "productivity",
-  "tags": ["fun", "animation", "tmux", "ascii-art", "terminal", "companion"],
-  "repository": "https://github.com/hodolee246/claude-pet",
-  "npm": "claude-pet",
-  "install": {
-    "npm": "claude-pet"
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "hodolee-plugins",
+  "description": "Claude Code plugins by hodolee",
+  "owner": {
+    "name": "hodolee246",
+    "email": "hodolee246@naver.com"
   },
-  "screenshots": []
+  "plugins": [
+    {
+      "name": "claude-pet",
+      "description": "Cute ASCII cat that lives in your tmux pane and reacts to Claude Code activity — thinking, happy, scared, sleeping.",
+      "category": "productivity",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/hodolee246/claude-pet.git"
+      },
+      "homepage": "https://github.com/hodolee246/claude-pet"
+    }
+  ]
 }
