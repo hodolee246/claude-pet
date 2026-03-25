@@ -4,12 +4,13 @@
  * Reads ~/.claude/claude-cat/state.json and renders animated ASCII cat.
  */
 
-import { readFileSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { join } from 'path';
 import { homedir } from 'os';
 import { ANIMATIONS, FRAME_SPEEDS } from './animations.mjs';
 
 const STATE_FILE = join(homedir(), '.claude', 'claude-cat', 'state.json');
+const DISPLAY_FILE = join(homedir(), '.claude', 'claude-cat', 'display.json');
 const SLEEP_AFTER_MS = 5 * 60 * 1000; // 5분 idle → sleep
 
 // ANSI helpers
@@ -80,6 +81,20 @@ function renderFrame(state, idx) {
   process.stdout.write(output);
 }
 
+// UI에서 읽을 수 있도록 현재 상태 저장
+function saveDisplayStatus() {
+  try {
+    const status = {
+      state: currentState,
+      frame: frameIndex,
+      timestamp: Date.now(),
+    };
+    writeFileSync(DISPLAY_FILE, JSON.stringify(status));
+  } catch {
+    // 파일 쓰기 실패 무시
+  }
+}
+
 // ── 메인 루프 ─────────────────────────────────────────────
 const POLL_INTERVAL = 200;
 const TICK = 100; // 100ms마다 tick
@@ -118,6 +133,7 @@ setInterval(() => {
   if (now - lastFrameMs >= speed) {
     lastFrameMs = now;
     renderFrame(currentState, frameIndex);
+    saveDisplayStatus(); // UI 상태 업데이트
     frameIndex++;
   }
 }, TICK);
