@@ -16,12 +16,7 @@ If `$ARGUMENTS` is `start`:
 
 3. Create pane and run daemon:
 ```!
-PLUGIN_ROOT="${CLAUDE_PLUGIN_ROOT}"
-PANE_ID=$(tmux split-window -v -l 9 -P -F '#{pane_id}' "node \"${PLUGIN_ROOT}/daemon/cat-daemon.mjs\"")
-mkdir -p ~/.claude/claude-cat
-echo "{\"paneId\":\"${PANE_ID}\"}" > ~/.claude/claude-cat/daemon-info.json
-tmux select-pane -t '{last}'
-echo "Claude Cat started in pane ${PANE_ID}"
+bash "$CLAUDE_PLUGIN_ROOT/scripts/cat-start.sh"
 ```
 
 4. Tell user: "Claude Cat is now watching from below!"
@@ -35,10 +30,7 @@ node -e "try{const d=require('fs').readFileSync(process.env.HOME+'/.claude/claud
 
 2. Kill pane and clean up:
 ```!
-PANE_ID=$(node -e "const d=require('fs').readFileSync(process.env.HOME+'/.claude/claude-cat/daemon-info.json','utf-8');console.log(JSON.parse(d).paneId)")
-tmux kill-pane -t "$PANE_ID" 2>/dev/null || true
-rm -f ~/.claude/claude-cat/daemon-info.json
-echo "Claude Cat stopped"
+bash "$CLAUDE_PLUGIN_ROOT/scripts/cat-stop.sh"
 ```
 
 3. Tell user: "Claude Cat has gone to sleep."
