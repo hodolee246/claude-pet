@@ -8,27 +8,13 @@ if [ -f ~/.claude/claude-cat/daemon-info.json ]; then
   exit 0
 fi
 
-# tmux 설치 확인
-if ! command -v tmux &> /dev/null; then
-  echo "Claude Cat requires tmux. Please install tmux first."
-  exit 1
-fi
-
-# tmux 세션 확인 및 생성
-if [ -z "$TMUX" ]; then
-  echo "Claude Cat requires tmux session. Please run: tmux new-session -s main"
-  exit 1
-fi
-
-# daemon 시작
-PANE_ID=$(tmux split-window -v -l 9 -P -F '#{pane_id}' "node \"${PLUGIN_ROOT}/daemon/cat-daemon.mjs\"" 2>/dev/null) || PANE_ID=""
-
-if [ -z "$PANE_ID" ]; then
-  echo "Failed to create tmux pane. Make sure you're in a tmux session."
-  exit 1
-fi
-
+# daemon 시작 (백그라운드 프로세스)
 mkdir -p ~/.claude/claude-cat
-echo "{\"paneId\":\"${PANE_ID}\"}" > ~/.claude/claude-cat/daemon-info.json
-tmux select-pane -t '{last}' 2>/dev/null || true
-echo "Claude Cat started in pane ${PANE_ID}"
+
+# nohup으로 daemon 시작 (tmux 불필요)
+nohup node "${PLUGIN_ROOT}/daemon/cat-daemon.mjs" > ~/.claude/claude-cat/daemon.log 2>&1 &
+DAEMON_PID=$!
+
+# PID 저장
+echo "{\"paneId\":\"${DAEMON_PID}\"}" > ~/.claude/claude-cat/daemon-info.json
+echo "Claude Cat daemon started (PID: ${DAEMON_PID})"
