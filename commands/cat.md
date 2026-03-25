@@ -16,7 +16,7 @@ If `$ARGUMENTS` is `start`:
 
 3. Create pane and run daemon:
 ```!
-bash "$CLAUDE_PLUGIN_ROOT/scripts/cat-start.sh"
+node "$CLAUDE_PLUGIN_ROOT/scripts/run.cjs" "$CLAUDE_PLUGIN_ROOT/scripts/cat-start.sh"
 ```
 
 4. Tell user: "Claude Cat is now watching from below!"
@@ -30,7 +30,7 @@ node -e "try{const d=require('fs').readFileSync(process.env.HOME+'/.claude/claud
 
 2. Kill pane and clean up:
 ```!
-bash "$CLAUDE_PLUGIN_ROOT/scripts/cat-stop.sh"
+node "$CLAUDE_PLUGIN_ROOT/scripts/run.cjs" "$CLAUDE_PLUGIN_ROOT/scripts/cat-stop.sh"
 ```
 
 3. Tell user: "Claude Cat has gone to sleep."
