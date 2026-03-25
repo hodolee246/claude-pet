@@ -16,7 +16,12 @@ If `$ARGUMENTS` is `start`:
 
 3. Create pane and run daemon:
 ```!
-node "$CLAUDE_PLUGIN_ROOT/scripts/run.cjs" "$CLAUDE_PLUGIN_ROOT/scripts/cat-start.sh"
+LATEST_VERSION=$(ls -d ~/.claude/plugins/cache/hodolee-plugins/claude-pet/*/ 2>/dev/null | sort -V | tail -1 | sed 's:/$::')
+if [ -z "$LATEST_VERSION" ]; then
+  echo "Claude Cat plugin not found"
+  exit 1
+fi
+bash "$LATEST_VERSION/scripts/cat-start.sh"
 ```
 
 4. Tell user: "Claude Cat is now watching from below!"
@@ -30,7 +35,12 @@ node -e "try{const d=require('fs').readFileSync(process.env.HOME+'/.claude/claud
 
 2. Kill pane and clean up:
 ```!
-node "$CLAUDE_PLUGIN_ROOT/scripts/run.cjs" "$CLAUDE_PLUGIN_ROOT/scripts/cat-stop.sh"
+LATEST_VERSION=$(ls -d ~/.claude/plugins/cache/hodolee-plugins/claude-pet/*/ 2>/dev/null | sort -V | tail -1 | sed 's:/$::')
+if [ -z "$LATEST_VERSION" ]; then
+  echo "Claude Cat plugin not found"
+  exit 1
+fi
+bash "$LATEST_VERSION/scripts/cat-stop.sh"
 ```
 
 3. Tell user: "Claude Cat has gone to sleep."
